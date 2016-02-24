@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.dad.gui.group.GroupBrowseExt"
+        extends="/com/haulmont/cuba/gui/app/security/group/browse/group-browse.xml"
+        messagesPack="com.company.dad.gui.group">
+    <companions>
+        <web class="com.company.dad.web.group.GroupBrowseCompanion"/>
+    </companions>
+    <layout/>
+</window>
