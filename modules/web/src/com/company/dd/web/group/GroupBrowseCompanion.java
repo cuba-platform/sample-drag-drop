@@ -1,12 +1,11 @@
-package com.company.dad.web.group;
+package com.company.dd.web.group;
 
-import com.company.dad.gui.group.GroupBrowseExt;
+import com.company.dd.gui.group.GroupBrowseExt;
 import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.Tree;
 import com.haulmont.cuba.security.entity.Group;
 import com.haulmont.cuba.security.entity.User;
-import com.haulmont.cuba.web.gui.components.WebComponentsHelper;
 import com.haulmont.cuba.web.gui.data.ItemWrapper;
 import com.haulmont.cuba.web.toolkit.ui.CubaTree;
 import com.vaadin.data.Container;
@@ -20,18 +19,19 @@ import com.vaadin.ui.AbstractSelect;
 
 import javax.annotation.Nullable;
 
+/**
+ * Web implementation of the drag-n-drop functionality for the Access Group screen.
+ */
 public class GroupBrowseCompanion implements GroupBrowseExt.Companion {
+
     @Override
     public void initDragAndDrop(Table<User> usersTable, Tree<Group> groupsTree, GroupBrowseExt.MoveAction moveAction) {
-        com.vaadin.ui.Table webTable = (com.vaadin.ui.Table) WebComponentsHelper.unwrap(usersTable);
-        CubaTree webTree = (CubaTree) WebComponentsHelper.unwrap(groupsTree);
-        initializerTree(webTree, moveAction);
-        webTable.setDragMode(com.vaadin.ui.Table.TableDragMode.ROW);
-    }
+        com.vaadin.ui.Table vTable = usersTable.unwrap(com.vaadin.ui.Table.class);
+        vTable.setDragMode(com.vaadin.ui.Table.TableDragMode.ROW);
 
-    private void initializerTree(com.vaadin.ui.Tree webTree, GroupBrowseExt.MoveAction moveAction) {
-        webTree.setDragMode(com.vaadin.ui.Tree.TreeDragMode.NODE);
-        webTree.setDropHandler(new DropHandler() {
+        CubaTree vTree = groupsTree.unwrap(CubaTree.class);
+        vTree.setDragMode(com.vaadin.ui.Tree.TreeDragMode.NODE);
+        vTree.setDropHandler(new DropHandler() {
             @Override
             public void drop(DragAndDropEvent dropEvent) {
                 DataBoundTransferable transferable = (DataBoundTransferable) dropEvent.getTransferable();
@@ -51,12 +51,12 @@ public class GroupBrowseCompanion implements GroupBrowseExt.Companion {
                 if (targetItemId == null) {
                     return;
                 }
-                Group group = convertToEntity(webTree.getItem(targetItemId), Group.class);
+                Group group = convertToEntity(vTree.getItem(targetItemId), Group.class);
                 if (group == null) {
                     return;
                 }
 
-                moveAction.userToGroup(user, group);
+                moveAction.moveUserToGroup(user, group);
             }
 
             @Override

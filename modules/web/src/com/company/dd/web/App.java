@@ -1,4 +1,4 @@
-package com.company.dad.web;
+package com.company.dd.web;
 
 import com.haulmont.cuba.web.DefaultApp;
 

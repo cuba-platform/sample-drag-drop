@@ -1,4 +1,4 @@
-package com.company.dad.gui.group;
+package com.company.dd.gui.group;
 
 import com.haulmont.cuba.gui.app.security.group.browse.GroupBrowser;
 import com.haulmont.cuba.gui.components.Table;
@@ -10,11 +10,19 @@ import java.util.Collections;
 import java.util.Map;
 
 public class GroupBrowseExt extends GroupBrowser {
+
+    /**
+     * Defines methods to be implemented in web client.
+     */
     public interface Companion {
         void initDragAndDrop(Table<User> usersTable, Tree<Group> groupsTree, MoveAction moveAction);
     }
+
+    /**
+     * Callback interface to react on a drag-n-drop event.
+     */
     public interface MoveAction {
-        void userToGroup(User user, Group newGroup);
+        void moveUserToGroup(User user, Group newGroup);
     }
 
     @Override

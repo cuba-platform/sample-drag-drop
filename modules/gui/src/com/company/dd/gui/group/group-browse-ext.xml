@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.dd.gui.group.GroupBrowseExt"
+        extends="/com/haulmont/cuba/gui/app/security/group/browse/group-browse.xml"
+        messagesPack="com.company.dd.gui.group">
+    <companions>
+        <web class="com.company.dd.web.group.GroupBrowseCompanion"/>
+    </companions>
+    <layout>
+        <split id="split"
+               height="100%">
+            <vbox id="topBox">
+                <tree id="groupsTree"
+                      height="100%"/>
+            </vbox>
+            <vbox id="tabSheetBox">
+                <tabSheet id="tabsheet">
+                    <tab id="usersTab">
+                        <filter/>
+                    </tab>
+                    <tab id="constraintsTab">
+                        <table id="constraintsTable"
+                               height="100%"/>
+                    </tab>
+                    <tab id="attributesTab">
+                        <table id="attributesTable"
+                               height="100%"/>
+                    </tab>
+                </tabSheet>
+            </vbox>
+        </split>
+    </layout>
+</window>

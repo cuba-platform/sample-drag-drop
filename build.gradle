@@ -1,10 +1,10 @@
 
 
 buildscript {
-    ext.cubaVersion = '6.0.8'
+    ext.cubaVersion = '6.2.2'
     repositories {
         maven {
-            url 'http://repository.haulmont.com:8587/nexus/content/groups/work'
+            url 'https://repo.cuba-platform.com/content/groups/work'
             credentials {
                 username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'cuba')
                 password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
@@ -29,7 +29,7 @@ apply(plugin: 'cuba')
 
 cuba {
     artifact {
-        group = 'com.company.dad'
+        group = 'com.company.dd'
         version = '0.1'
         isSnapshot = true
     }
@@ -115,7 +115,7 @@ configure(coreModule) {
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
         dbms = 'hsql'
         host = 'localhost'
-        dbName = 'dad'
+        dbName = 'dd'
         dbUser = 'sa'
         dbPassword = ''
     }
@@ -123,7 +123,7 @@ configure(coreModule) {
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
         dbms = 'hsql'
         host = 'localhost'
-        dbName = 'dad'
+        dbName = 'dd'
         dbUser = 'sa'
         dbPassword = ''
     }
@@ -141,7 +141,7 @@ configure(guiModule) {
 
     task deployConf(type: Copy) {
         from file('src')
-        include "com/company/dad/**"
+        include "com/company/dd/**"
         into "$cuba.tomcat.dir/conf/app"
     }
 }
@@ -175,7 +175,7 @@ configure(webModule) {
 
     task deployConf(type: Copy) {
         from file('src')
-        include "com/company/dad/**"
+        include "com/company/dd/**"
         into "$cuba.tomcat.dir/conf/app"
     }
     
@@ -197,7 +197,7 @@ configure(webModule) {
     task deploy(dependsOn: [assemble, cleanConf], type: CubaDeployment) {
         appName = 'app'
         appJars('cuba-client', 'cuba-gui', 'cuba-web', 'cuba-global', 
-                'app-global', 'app-gui', 'app-web')
+                'app-global', 'app-gui', 'app-web', 'cuba-rest-api')
     }
 }
 
@@ -220,5 +220,5 @@ task restart(dependsOn: ['stop', ':app-core:deploy', ':app-web:deploy'], descrip
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.6'
+    gradleVersion = '2.13'
 }
