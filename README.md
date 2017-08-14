@@ -28,4 +28,4 @@ A user should be able to move users between groups in the _Access Groups_ screen
 
 * The `GroupBrowseCompanion.initDragAndDrop()` method obtains Vaadin components from CUBA table and tree and initializes their drag-n-drop parameters.
 
-Based on CUBA Platform 6.5.4
+Based on CUBA Platform 6.6.1
